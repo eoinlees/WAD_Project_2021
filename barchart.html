@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        rect:hover {fill: rgb(143, 139, 139);}
+    </style>
+    <meta charset="UTF-8">
+    <title>Barchart</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+    <a href="project.html">
+        <img src="gmitLogo.png" alt="Home link" title="Home page" width="18%">
+    </a>
+
+    <h1>This is where i put the stuff forIt will have bar charts and visualisations.</h1>
+
+    <p>The data will come from a random input and also a csv file. It will be possible to edit the charts on this page</p>
+    <br>
+    <div id="myDiv1"></div>
+    <br>
+
+    <div id="myDiv"></div>
+    <br>
+    
+
+    <a href="project.html">Return to project page</a>
+</body>
+</html>
+
+<script>
+var myArray = [100, 220, 20, 160, 190, 90, 320];
+var mySecondArray = [200, 300, 400, 95];
+
+d3.csv("data.csv").then(function(data){
+    console.log(data);
+
+    let svgContainer = d3.select("#myDiv1").append("svg")
+        .attr("width",1000)
+        .attr("height",700);
+
+    // Create bar chart using data from csv
+    let myRectangle = svgContainer.selectAll("rect")
+        .data(data);
+    
+    myRectangle.enter()
+        // Start of Transition
+        .append("rect")
+            .attr("fill", "black")
+            .attr("x", function(d,i){
+                return 50 + (i*41);
+            })
+            .attr("y", 300)
+            .attr("width", 40)
+            .transition()
+            .duration(1000)
+
+            // Transition over - bar attributes
+            .attr("x", function(d,i){
+                return 50 + (i*41);
+            })
+            .attr("y", function(d){
+                return 300 - d.temp *10;
+            })
+            .attr("width", 40)
+            .attr("height", function(d){
+                return d.temp * 10;
+            })
+            .attr("fill", function(d){
+                if (d.temp <=10) {return "blue";}
+                else if (d.temp <=15) {return "green";}
+                else if (d.temp <=20) {return "orange";}
+                else {return "red";}
+            });
+
+    // Add Label to barchart
+    let myLabels = svgContainer.selectAll("text")
+        .data(data);
+
+    
+    myLabels.enter()
+        .append("text")
+
+            // Start of Labels Transition - Degrees
+            .attr("x", function(d,i){
+                return 70 + (i*41);
+            })
+            .attr("y", "300")
+
+            // Transition settings
+            .transition()
+            .duration(3000)
+            .delay(1000)
+            .ease(d3.easeLinear)
+
+            // Text of labels: Temperature in degrees
+            .attr("x", function(d,i){
+                return 70 + (i*41);
+            })
+            .attr("y", function(d){
+                return 325 - d.temp *10;
+            })
+            .attr("text-anchor", "middle")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "18px")
+            .attr("fill", "white")
+            .text(function(d){
+                return d.temp + "\u00B0";
+            
+            })
+            // Transition settings
+            .transition()
+            .duration(1500)
+            .delay(function(d,i){
+                return i * 400;
+            })
+            .ease(d3.easeBounceOut)
+
+            // Text of labels: Months
+            .attr("x", function(d,i){
+                return 70 + (i*41);
+            })
+            .attr("y", 310)
+            .attr("text-anchor", "middle")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "9px")
+            .attr("fill", "black")
+            .text(function(d){
+                return d.month
+            
+            
+            });
+
+        
+        
+
+
+})
+
+let svgContainer2 = d3.select("#myDiv").append("svg")
+    .attr("width",1000)
+    .attr("height",1000);
+
+let myRectangle2 = svgContainer2.selectAll("rect")
+    .data(myArray);
+
+myRectangle2.enter()
+    .append("rect")
+        .attr("x", function(d,i){return 50 + (i*110);})
+        .attr("y", 50)
+        .attr("width", 100)
+        .attr("height", function(d){return d;})
+        .attr("fill", "green")
+
+</script>
