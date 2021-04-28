@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     <style>
-        rect:hover {fill: rgb(143, 139, 139);}
+        
+        rect:hover {fill: rgb(21, 201, 171);}
+
+        .myClass {border: 2px solid black;}
     </style>
     <meta charset="UTF-8">
     <title>Barchart</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+
 </head>
 <body>
     <a href="project.html">
@@ -49,7 +53,7 @@ function drawChart(){
 
     // Values for bar chart
     var height = document.getElementById("chartHeight").value;
-    var width = 600;
+    var width = 800;
     var gap = 10;
     var dataCount = data.length;
 
@@ -81,8 +85,9 @@ function drawChart(){
 
     // Create SVG Container
     let svgContainer = d3.select("#myDiv1").append("svg")
-        .attr("width",1000)
-        .attr("height",1000);
+        .attr("width",875)
+        .attr("height",950)
+        .attr("class","myClass");
 
     // Create bar chart using data from csv
     let myRectangle = svgContainer.selectAll("rect")
@@ -96,7 +101,7 @@ function drawChart(){
                 return 50 + (i*(width/dataCount));
             })
             .attr("y", function(d){
-                yScale(d.temp)
+                return yScale(d.temp);
             })
             .attr("width", (width/dataCount - gap))
             .transition()
@@ -107,26 +112,23 @@ function drawChart(){
                 return 50 + (i*(width/dataCount));
             })
             .attr("y", function(d){
-                return  yScale(d.temp) ;
+                return 20 + yScale(d.temp);
             })
             .attr("width", (width/dataCount - gap))
             .attr("height", function(d){
-                return height - yScale(d.temp) ;
+                return height - yScale(d.temp)  ;
             })
             .attr("fill", function(d){
                 if (d.temp <=10) {return "blue";}
                 else if (d.temp <=15) {return "green";}
                 else if (d.temp <=20) {return "orange";}
                 else {return "red";}
-
-            
             });
 
     // Add Label to barchart
     let myLabels = svgContainer.selectAll("text")
         .data(data);
 
-    
     myLabels.enter()
         .append("text")
 
@@ -134,7 +136,9 @@ function drawChart(){
             .attr("x", function(d,i){
                 return 70 + (i*(width/dataCount));
             })
-            .attr("y", height)
+            .attr("y",  function(){
+                return height;
+            })
 
             // Transition settings
             .transition()
@@ -147,7 +151,7 @@ function drawChart(){
                 return 70 + (i*(width/dataCount));
             })
             .attr("y", function(d){
-                return 25 + yScale(d.temp);
+                return 45 + yScale(d.temp);
             })
             .attr("text-anchor", "middle")
             .attr("font-family", "sans-serif")
@@ -157,38 +161,18 @@ function drawChart(){
                 return d.temp + "\u00B0";
             
             });
-            // Transition settings for month animation
 
-            //.transition()
-            //.duration(1500)
-            //.delay(function(d,i){
-            //    return i * 400;
-            //})
-            //.ease(d3.easeBounceOut)
-
-            //// Text of labels: Months
-            //.attr("x", function(d,i){
-            //    return 70 + (i * (width/dataCount));
-            //})
-            //.attr("y", function(d){return (height) })
-            //.attr("text-anchor", "middle")
-            //.attr("font-family", "sans-serif")
-            //.attr("font-size", "8px")
-            //.attr("fill", "black")
-            //.text(function(d){
-            //    return d.month
-        
-        
-            
-            //});
-
-        // Add y + x axis to correct location
+        // Add y axis to correct location
         svgContainer.append("g")
-            .attr("transform", "translate(45,0)")
+            .attr("transform", "translate(45,20)")
             .call(yAxis);
 
+        // Create variable to add 20 to height - could not figure out how to do it in transform below
+        var heightFromTop = +height + 20;
+        
+        // Add x axis to correct location
         svgContainer.append("g")
-            .attr("transform", "translate(50, " + height + ")")
+            .attr("transform", "translate(50, " + heightFromTop +")")
             .call(xAxis)
             .selectAll("text")
                 .attr("transform", "rotate(60)")
