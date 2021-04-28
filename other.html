@@ -6,14 +6,6 @@
         rect:hover {fill: rgb(21, 201, 171);}
 
         .myClass {border: 2px solid black;}
-
-        .center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 20%;
-            }
-
     </style>
     <meta charset="UTF-8">
     <title>Barchart</title>
@@ -21,19 +13,13 @@
 
 </head>
 <body>
-    <a href="https://www.gmit.ie/">
-        <img class="center" src="gmitLogo.png" alt="https://www.gmit.ie/" title="https://www.gmit.ie/" >
+    <a href="project.html">
+        <img src="gmitLogo.png" alt="Home link" title="Home page" width="18%">
     </a>
 
-    <h1 style="text-align: center;"> Barchart </h1>
+    <h1>This is where i put the stuff forIt will have bar charts and visualisations.</h1>
 
-    <p>
-        It uses data imported from the attached "data.csv" file. It shows average temperature in \u00B0 Celcius for each month of the year.
-        Press the Draw Chart button below to run. It will generate based on the default selections.
-        If you make changes to any of the options below it will be reflected in the barchart after pressing the button again.
-        The data for the graph is not based upon real data. It is just an example of the functionality possible. 
-    </p>
-
+    <p>The data will come from a random input and also a csv file. It will be possible to edit the charts on this page</p>
     <div id="chartControl" style="text-align: center;">
         Select Chart Height:
         <select id="chartHeight">
@@ -46,9 +32,9 @@
 
         Select Animation:
         <select id="chartAnimation">
-            <option value = "d3.easeLinear">easeLinear</option>
-            <option value = "d3.easeBounceOut">easeBounceOut</option>
-            <option value = "d3.easeElasticOut">easeElasticOut</option>
+            <option value = "900">Fade in</option>
+            <option value = "1200">Bounce in</option>
+            <option value = "1200">Other</option>
             
         </select>
         <br>
@@ -83,7 +69,7 @@ function drawChart(){
     d3.csv("data.csv").then(function(data){
         console.log(data);
 
-
+        
     // Convert to numbers
     data.forEach(function(d){
         d.temp = Number(d.temp);
@@ -98,9 +84,6 @@ function drawChart(){
     var colorTwo = document.getElementById("colorTwo").value;
     var colorThree = document.getElementById("colorThree").value;
     var colorFour = document.getElementById("colorFour").value;
-    var easeSelection = function(){
-        return document.getElementById("chartAnimation").value;
-    };
 
 
     // Create a scale for Y
@@ -146,13 +129,11 @@ function drawChart(){
                 return 50 + (i*(width/dataCount));
             })
             .attr("y", function(d){
-                return 20 + +height;
+                return yScale(d.temp);
             })
             .attr("width", (width/dataCount - gap))
             .transition()
             .duration(1000)
-            .ease(d3.easeLinear)
-            //.ease(easeSelection)
 
             // Transition over - bar attributes
             .attr("x", function(d,i){
@@ -163,7 +144,7 @@ function drawChart(){
             })
             .attr("width", (width/dataCount - gap))
             .attr("height", function(d){
-                return  height - yScale(d.temp)  ;
+                return height - yScale(d.temp)  ;
             })
             .attr("fill", function(d){
                 if (d.temp <=10) {return colorOne;}
@@ -181,7 +162,7 @@ function drawChart(){
 
             // Start of Labels Transition - Degrees
             .attr("x", function(d,i){
-                return 80 + (i*(width/dataCount));
+                return 70 + (i*(width/dataCount));
             })
             .attr("y",  function(){
                 return height;
@@ -191,15 +172,14 @@ function drawChart(){
             .transition()
             .duration(1000)
             .delay(1000)
-            .ease(d3.easeBounceOut)
-            //.ease(d3.easeLinear)
+            .ease(d3.easeLinear)
 
             // Text of labels: Temperature in degrees
             .attr("x", function(d,i){
-                return 80 + (i*(width/dataCount));
+                return 70 + (i*(width/dataCount));
             })
             .attr("y", function(d){
-                return 55 + yScale(d.temp);
+                return 45 + yScale(d.temp);
             })
             .attr("text-anchor", "middle")
             .attr("font-family", "sans-serif")
