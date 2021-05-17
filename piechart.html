@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        
+        rect:hover {fill: rgb(21, 201, 171);}
+
+        .myClass {border: 2px solid black;}
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 20%;
+            }
+            
+
+    </style>
+    <meta charset="UTF-8">
+    <title>Barchart</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!--Colour Scale-->
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+</head>
+<body>
+    <!--Gmit logo, linked to gmit website-->
+    <a href="https://www.gmit.ie/">
+        <img class="center" src="gmitLogo.png" alt="https://www.gmit.ie/" title="https://www.gmit.ie/" >
+    </a>
+    <!--Heading to page.-->
+    <h1 style="text-align: center;"> Pie Chart </h1>
+    <!--Paragraph explaining what is happening in each situation-->
+    <p>
+        It uses data imported from a hard coded array in the code. It shows a pie chart with the sections split in proportion to their value divided by the sum of the total values. 
+        
+        Press the Data 1 or  Data 2 Button and the Piechart will change proportion.
+        It will generate based on the default selections.
+        If you make changes to any of the options below it will be reflected in the piechart after pressing the button again.
+
+        The data for the graph is not based upon real data. It is just an example of the functionality possible. 
+    </p>
+    <!--Barchart from csv-->
+    <!--Height of chart selection-->
+
+    <br>
+    <br>
+    <div id="arrayChart" style="text-align: center;">
+    Select Chart Size:
+    <select id="arrayChartHeight">
+        <option value = "300">300 Pixels</option>
+        <option value = "600">600 Pixels</option>
+        <option value = "900">900 Pixels</option>
+    </select>
+    Select Chart type: 
+    <select id="arrayChartType">
+        <option value = "300">Circles</option>
+        <option value = "600">Stars</option>
+    </select>
+    Select Colour:
+    <input id="colorArray" type="color" value="#FF5733">
+    <br>
+    Enter Value 1:<input type="text" id="valueOne" size="1" Value="10">
+    Enter Value 2:<input type="text" id="valueTwo" size="1" Value="20">
+    Enter Value 3:<input type="text" id="valueThree" size="1" Value="30">
+    Enter Value 4:<input type="text" id="valueFour" size="1" Value="50">
+    <br>
+    <button onclick="drawCharArray()">Draw Array Chart</button>
+    </div>
+    <br>
+    <div id="myDiv2" style="text-align: center;"></div>
+
+    <br>
+    <!--Pie Chart Div-->
+    <div id="pieChart" style="text-align: center;">
+        Pie Chart Selection
+        <button onclick="update(data1)">Data 1</button>
+        <button onclick="update(data2)">Data 2</button>
+    </div>
+    
+    
+    <a href="project.html">Return to project page</a>
+</body>
+</html>
+
+<script>
+// Scripts for piechart functionality here
+
+
+function drawCharArray(){
+    
+// Delete existing div
+    d3.select("#myDiv2").selectAll("*").remove();
+
+// Create Variables
+
+var heightArray = 100
+var widthArray = 400
+var colorArray = document.getElementById("colorArray").value;
+
+// Create Array from entered values
+var myArray = [valueOne, valueTwo, valueThree, valueFour]
+
+// Create svg container for circles
+let svgContainerCircles = d3.select("#myDiv2").append("svg")
+        .attr("width",(+widthArray + 100))
+        .attr("height",(+heightArray + 100))
+        .attr("class","myClass");
+
+let circles = svgContainerCircles.selectAll("circle")
+    .data(myArray);
+
+circles.enter()
+    .append("circle")
+        .attr("cx", function(d,i){return 50 + (i*100);})
+        .attr("cy", 100)
+        .attr("r", function(d){return d;})
+        .attr("fill", colorArray)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Code block taken from https://www.d3-graph-gallery.com/graph/pie_changeData.html
+// Edited to preform functionality required
+
+
+// set the dimensions and margins of the graph
+var widthPie = 450
+var heightPie = 450
+var marginPie = 40
+
+// Get values from input
+var valueOne = document.getElementById("valueOne").value;
+var valueTwo = document.getElementById("valueTwo").value;
+var valueThree = document.getElementById("valueThree").value;
+var valueFour = document.getElementById("valueFour").value;
+var valueFive = document.getElementById("valueFour").value;
+
+// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+var radius = Math.min(widthPie, heightPie) / 2 - marginPie
+
+// append the svg object to the div called 'my_dataviz'
+var svgContainerPie = d3.select("#pieChart").append("svg")
+            .attr("width", widthPie)
+            .attr("height", heightPie)
+            .attr("class","myclass")
+
+        .append("g")
+            .attr("transform", "translate(" + widthPie / 2 + "," + heightPie / 2 + ")");
+
+// create 2 data_set
+var data1 = {a: valueOne, b: valueTwo, c:valueThree, d:valueFour, e:valueFive}
+var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
+
+// set the color scale
+var color = d3.scaleOrdinal()
+    .domain(["a", "b", "c", "d", "e", "f"])
+    .range(d3.schemeDark2);
+
+// A function that create / update the plot for a given variable:
+function update(data) {
+
+    // Compute the position of each group on the pie:
+    var pie = d3.pie()
+        .value(function(d) {return d.value; })
+        .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+    var data_ready = pie(d3.entries(data))
+
+    // map to data
+    var u = svgContainerPie.selectAll("path")
+        .data(data_ready)
+
+    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+    u
+        .enter()
+        .append('path')
+        .merge(u)
+        .transition()
+        .duration(1000)
+        .attr('d', d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius)
+        )
+        .attr('fill', function(d){ return(color(d.data.key)) })
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 1)
+
+    // remove the group that is not present anymore
+    u
+        .exit()
+        .remove()
+
+}
+
+// Initialize the plot with the first dataset
+
+update(data1)
+
+</script>
