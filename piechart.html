@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
+    <style type="text/css">
         
         rect:hover {fill: rgb(21, 201, 171);}
 
@@ -107,12 +107,18 @@
         Value 2:<input type="text" id="valueTwo" size="1" Value="20">
         Value 3:<input type="text" id="valueThree" size="1" Value="30">
         Value 4:<input type="text" id="valueFour" size="1" Value="50">
+        Value 5:<input type="text" id="valueFive" size="1" Value="100">
         <br>
         <br>
-        <button onclick="drawPieChart()">Draw Pie Chart</button>
+        
         Pie Chart Selection
         <button onclick="update(data1)">Data 1</button>
         <button onclick="update(data2)">Data 2</button>
+        <br>
+        <br>
+        <button onclick="changeTheVariable()">Updata Data 1 variables</button>
+
+
 
     </div>
     <br>
@@ -131,7 +137,7 @@
     <div class="content">
         Navigation:
         <ul>
-            <li><a href="project.html">Main page</a></li>
+            <li><a href="project.html">Main Menu</a></li>
             <li><a href="barchart.html">Bar chart</a></li>
             <li><a href="galway.html">Galway</a></li>
             <li><a href="startHere.html">Landing Page</a></li>
@@ -149,56 +155,12 @@
 
 
 
-
-
-
-
-
-function drawCharArray(){
-
-// Create Variables
-
-var heightArray = 100
-var widthArray = 400
-var colorArray = document.getElementById("colorArray").value;
-
-// Create Array from entered values
-var myArray = [valueOne, valueTwo, valueThree, valueFour]
-
-// Create svg container for circles
-let svgContainerCircles = d3.select("#myDiv2").append("svg")
-        .attr("width",(+widthArray + 100))
-        .attr("height",(+heightArray + 100))
-        .attr("class","myClass");
-
-let circles = svgContainerCircles.selectAll("circle")
-    .data(myArray);
-
-circles.enter()
-    .append("circle")
-        .attr("cx", function(d,i){return 50 + (i*100);})
-        .attr("cy", 100)
-        .attr("r", function(d){return d;})
-        .attr("fill", colorArray)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-function drawPieChart(){
 // Code block taken from https://www.d3-graph-gallery.com/graph/pie_changeData.html
 // Edited to preform functionality required
 
 // Delete existing div
-d3.select("#pieChart").selectAll("*").remove();
+//d3.select("#pieChart").selectAll("*").remove();
+
 
 // set the dimensions and margins of the graph
 var widthPie = document.getElementById("pieChartWidth").value;
@@ -210,7 +172,20 @@ var valueOne = document.getElementById("valueOne").value;
 var valueTwo = document.getElementById("valueTwo").value;
 var valueThree = document.getElementById("valueThree").value;
 var valueFour = document.getElementById("valueFour").value;
-var valueFive = document.getElementById("valueFour").value;
+var valueFive = document.getElementById("valueFive").value;
+
+
+function changeTheVariable(){
+    var valueOne = document.getElementById("valueOne").value;
+    var valueTwo = document.getElementById("valueTwo").value;
+    var valueThree = document.getElementById("valueThree").value;
+    var valueFour = document.getElementById("valueFour").value;
+    var valueFive = document.getElementById("valueFive").value;
+
+    var widthPie = document.getElementById("pieChartWidth").value;
+    var heightPie = document.getElementById("pieChartWidth").value;
+    var marginPie = 40
+}
 
 // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
 var radius = Math.min(widthPie, heightPie) / 2 - marginPie
@@ -224,18 +199,24 @@ var svgContainerPie = d3.select("#pieChart").append("svg")
         .append("g")
             .attr("transform", "translate(" + widthPie / 2 + "," + heightPie / 2 + ")");
 
-// create 2 data_set
-var data1 = {a: valueOne, b: valueTwo, c:valueThree, d:valueFour, e:valueFive}
-var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
+
+
 
 // set the color scale
 var color = d3.scaleOrdinal()
     .domain(["a", "b", "c", "d", "e", "f"])
     .range(d3.schemeDark2);
 
+var data1 = {a: valueOne, b: valueTwo, c:valueThree, d:valueFour, e:valueFive}
+var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
 
 // A function that create / update the plot for a given variable:
 function update(data){
+
+
+
+    // create 2 data_set
+
 
     // Compute the position of each group on the pie:
     var pie = d3.pie()
@@ -269,9 +250,10 @@ function update(data){
         .remove()
 
 }
-}
+
+
 // Initialize the plot with the first dataset
 
-update(data1)
+//update(data1)
 
 </script>

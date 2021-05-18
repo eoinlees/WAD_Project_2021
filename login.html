@@ -63,7 +63,7 @@
     <!--Login form input starts here-->
         <form>
             <b>E-mail</b><br>
-            <input type="email" size="30" required>
+            <input type="email" id="email" size="30" required>
             <br>
             <br>
             <b>Password</b><br>
@@ -99,12 +99,18 @@
 //alert("Welcome to my projecet page!");
 
 function checkPassword(){
-    if(document.getElementById('password').value == 'password'){
-        alert('Correct Password!'); 
-        document.location.href="project.html";
+    if(document.getElementById('password').value == 'password' && document.getElementById('email').value == 'hello@email.com'){
+        alert('Correct E-mail & Password!'); 
+        
+        
+        //Open page in new window
+        
+        window.open("project.html");
+        
         }
+    
     else {
-        alert('Wrong Password!');
+        alert('Incorrect E-mail or Password. Please try again. ');
         return false;
     };
 }
