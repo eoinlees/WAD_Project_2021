@@ -99,13 +99,7 @@
                     
         </select>
         <!--Animation Selection-->
-        Select Animation:
-        <select id="chartAnimation">
-            <option value = "d3.easeLinear">easeLinear</option>
-            <option value = "d3.easeBounceOut">easeBounceOut</option>
-            <option value = "d3.easeElasticOut">easeElasticOut</option>
-            
-        </select>
+        
         <br>
         <!--Select Colour of each temperature range-->
         Colour <=10: 
@@ -118,7 +112,12 @@
         <input id="colorFour" type="color" value="#FF5733">
         <br>
         <br>
-        <button onclick="drawChart()">Draw Barchart</button>
+        Select Animation for Barchart: <br>
+        <button onclick="drawChart(d3.easeCircleIn);">Draw Circle In transition Barchart</button>
+        
+        <button onclick="drawChart(d3.easeBounceOut);">Draw Bounce out transition Barchart</button>
+        
+        <button onclick="drawChart(d3.easeLinear);">Draw Linear transition Barchart</button>
     </div>
     <br>
     <!--Div 1: Barchart from csv file div-->
@@ -152,8 +151,10 @@
 
 // Scripts for barchart functionality here
 
+
+
 //Create Barchart function for csv file
-function drawChart(){
+function drawChart(ease){
     // Import data from CSV file
     d3.csv("data.csv").then(function(data){
         console.log(data);
@@ -173,9 +174,8 @@ function drawChart(){
     var colorTwo = document.getElementById("colorTwo").value;
     var colorThree = document.getElementById("colorThree").value;
     var colorFour = document.getElementById("colorFour").value;
-    var easeSelection = function(){
-        return document.getElementById("chartAnimation").value;
-    };
+        
+    
 
 
     // Create a scale for Y
@@ -226,8 +226,8 @@ function drawChart(){
             .attr("width", (width/dataCount - gap))
             .transition()
             .duration(1000)
-            .ease(d3.easeLinear)
-            //.ease(easeSelection)
+            //.ease(d3.easeLinear)
+            .ease(ease)
 
             // Transition over - bar attributes
             .attr("x", function(d,i){
@@ -266,7 +266,7 @@ function drawChart(){
             .transition()
             .duration(1000)
             .delay(1000)
-            .ease(d3.easeBounceOut)
+            .ease(ease)
             //.ease(d3.easeLinear)
 
             // Text of labels: Temperature in degrees
