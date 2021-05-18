@@ -2,51 +2,116 @@
 <html lang="en">
 <head>
     <title>Web App Development 2021</title>
+<style type="text/css">
+
+    /* content class style - for body*/
+    .content {
+        height: 75%;
+        width: 75%;
+        max-width: 800px;
+        margin: auto;
+        color:black;
+        background-color: #F0F8FF;
+        min-width: 350px;
+        }
+
+    /*My class style - for headings*/
+    .myClass{
+        color: rgb(4, 4, 138);
+        font-size: 30px;
+        text-indent: 10%;
+        
+    }
+    .selection{
+        border-style:ridge;
+        border-radius: 15px;
+        margin: 10px;
+        padding: 30px;
+
+    }
+
+    /* Set Styling links - common on all pages */
+    *{
+        font-family: Arial;
+        
+    }
+    a:link {
+        color: deepskyblue;
+        text-decoration: none;
+    }
+    a:hover{
+        color: darkcyan;
+        text-decoration: underline;
+    }
+    a:visited{
+        color:orangered;
+
+    }
+</style>
 </head>
 
-<body bgcolor="#F0F8FF">
+
+<body class="content" >
     <a href="project.html">
-        <img src="images\gmitLogo.png" alt="Home link" title="Home page" width="18%">
+        <img src="images\gmitLogo.png" alt="Home link" title="Home page" width="400">
     </a>
-        <h1>Project 2021 - 50%</h1>
-        <h2>Eoin Lees - G00387888 </h2>
         
-    <p>This is where i describe the project in paragraph 1</p>
+        <h3 class="myClass"><u>Main Menu</u></h2>
 
 
 <div>
+    <h2 class="myClass">List of pages: </h2>
     <p>
-        Select from the list below where you wish to navigate to:
+        Please select from the list below where you wish to navigate to.<br> Each page demonstrates a different feature of html, CSS and javaScript. 
     </p>
 <!--Create an unordered list to add links-->
-        <b>Gives a description of galway. The text can be changed through the DOM.</b> 
-        <br>
-        <br>
-        <a href="galway.html">
-            <img src="images\about-galway.jpg"  title="Galway" Width="400">
-        </a>
-        <ul>
-            <li><a href="piechart.html">Array Pie Chart</a></li>
-        </ul>
+        <div class="selection">
+            <b>Gives a description of galway. The text can be changed through the DOM.</b> 
+            <br>
+            <br>
+            <a href="galway.html">
+                <img src="images\about-galway.jpg"  title="Galway" Width="300">
+            </a>
+            <ul>
+                <li><a href="galway.html">Galway (DOM)</a></li>
+            </ul>
+        </div>
 
-        <b>Shows data taken from an array visualised as a pie chart.</b> 
-        <br>
-        <br>
-        
-        <a href="piechart.html">
-            <img src="images\piechart.png"  title="Pie Chart" Width="400">
-        </a>
-        <ul>
-            <li><a href="piechart.html">Array Pie Chart</a></li>
-        </ul>
-        <b>Shows data taken from a csv file visualised as a bar chart. </b>
-        <br>
-        <a href="barchart.html">
-            <img src="images\barchart.png"  title="Bar Chart" Width="400">
-        </a>
-        <ul>
-            <li><a href="barchart.html">CSV Barchart</a></li>
-        </ul>
+        <div class="selection">
+            <b>Shows data taken from an array visualised as a pie chart.</b> 
+            <br>
+            <br>
+            
+            <a href="piechart.html">
+                <img src="images\piechart.png"  title="Pie Chart" Width="300">
+            </a>
+            <ul>
+                <li><a href="piechart.html">Array Pie Chart</a></li>
+            </ul>
+        </div>
+
+        <div class="selection">
+            <b>Shows data taken from a csv file visualised as a bar chart. </b>
+            <br>
+            <a href="barchart.html">
+                <img src="images\barchart.png"  title="Bar Chart" Width="300">
+            </a>
+            <ul>
+                <li><a href="barchart.html">CSV Barchart</a></li>
+            </ul>
+        </div>
+    <!--Link to return to login page-->
+        <div class="selection">
+            <b>Returns to the Log In page</b>
+            <br>
+            <br>
+            <a href="login.html">
+                <img src="images\login.png"  title="Log In" Width="300">
+            </a>
+            <ul>
+                <li><a href="login.html">Log In</a></li>
+            </ul>
+        </div>
     <br>
 <!--List ends here-->
 </div>
@@ -54,10 +119,8 @@
 
 
     <br>
-<!--Link to return to login page-->
-        <a href="login.html">Login</a>
-    <br>
-    <br>
+
+
     <br>
 
 <!--Link to take you to top of page-->

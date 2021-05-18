@@ -5,15 +5,63 @@
         
         rect:hover {fill: rgb(21, 201, 171);}
 
-        .myClass {border: 2px solid black;}
+        .barchart {border: 2px solid black;}
 
         .center {
+            
             display: block;
             margin-left: auto;
             margin-right: auto;
             width: 20%;
             }
+
+        /* content class style - for body*/
+        .content {
+            height: 75%;
+            width: 75%;
+            max-width: 800px;
+            margin: auto;
+            color:black;
+            background-color: #F0F8FF;
+            text-align: justify;
+            text-align: center;
             
+            }
+        
+        /* Selection border*/
+        .selection{
+        border-style:ridge;
+        border-radius: 15px;
+        margin: 10px;
+        padding: 30px;
+
+        }
+    
+        /*My class style - for headings*/
+        .myClass{
+            color: rgb(4, 4, 138);
+            font-size: 30px;
+            text-indent: 10%;
+            
+        }
+    
+        /* Set Styling links - common on all pages */
+        *{
+            font-family: Arial;
+            
+        }
+        a:link {
+            color: deepskyblue;
+            text-decoration: none;
+        }
+        a:hover{
+            color: darkcyan;
+            text-decoration: underline;
+        }
+        a:visited{
+            color:orangered;
+            
+        }
 
     </style>
     <meta charset="UTF-8">
@@ -24,7 +72,7 @@
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 </head>
-<body bgcolor="#F0F8FF">
+<body class="content">
     <!--Gmit logo, linked to gmit website-->
     <a href="https://www.gmit.ie/">
         <img class="center" src="gmitLogo.png" alt="https://www.gmit.ie/" title="https://www.gmit.ie/" >
@@ -41,7 +89,7 @@
 
     <!--Barchart from csv-->
     <!--Height of chart selection-->
-    <div id="chartControl" style="text-align: center;">
+    <div id="chartControl" class="selection">
         Select Chart Height:
         <select id="chartHeight">
             <option value = "300">300 Pixels</option>
@@ -83,12 +131,19 @@
     
     
     <!--Links to other pages-->
-    <p style="text-align: center;">
-        <a href="project.html" >Return to project page</a>
-        <br>
-        <br>
-        <a href="piechart.html">Pie Chart</a>
-    </p>
+    <div style="text-align: center;">
+        Navigation:
+        <ul>
+            <li><a href="project.html">Main page</a></li>
+            <li><a href="barchart.html">Bar chart</a></li>
+            <li><a href="piechart.html">Pie Chart</a></li>
+            <li><a href="startHere.html">Landing Page</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    
+        <a href="#">Back to top</a>
+    </div>
+
     
 </body>
 </html>
@@ -152,7 +207,7 @@ function drawChart(){
     let svgContainer = d3.select("#myDiv1").append("svg")
         .attr("width",(+width + 75))
         .attr("height",(+height + 80))
-        .attr("class","myClass");
+        .attr("class","barchart");
 
     // Create bar chart using data from csv
     let myRectangle = svgContainer.selectAll("rect")

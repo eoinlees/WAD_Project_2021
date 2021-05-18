@@ -5,17 +5,61 @@
         
         rect:hover {fill: rgb(21, 201, 171);}
 
-        .myClass {border: 2px solid black;}
-
         .center {
             display: block;
             margin-left: auto;
             margin-right: auto;
             width: 20%;
             }
-            
+
+        /* content class style - for body*/
+        .content {
+            height: 75%;
+            width: 75%;
+            max-width: 800px;
+            margin: auto;
+            color:black;
+            background-color: #F0F8FF;
+            text-align: justify;
+            text-align: center;
+            }
+        /* Selection border*/
+        .selection{
+        border-style:ridge;
+        border-radius: 15px;
+        margin: 10px;
+        padding: 30px;
+
+        }
+        
+        /*My class style - for headings*/
+        .myClass{
+            color: rgb(4, 4, 138);
+            font-size: 30px;
+            text-align: center;
+
+        }
+
+        /* Set Styling links - common on all pages */
+        *{
+            font-family: Arial;
+
+        }
+        a:link {
+            color: deepskyblue;
+            text-decoration: none;
+        }
+        a:hover{
+            color: darkcyan;
+            text-decoration: underline;
+        }
+        a:visited{
+            color:orangered;
+        
+        }
 
     </style>
+
     <meta charset="UTF-8">
     <title>Barchart</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -24,13 +68,14 @@
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 </head>
-<body  bgcolor="#F0F8FF">
+
+<body  class="content">
     <!--Gmit logo, linked to gmit website-->
     <a href="https://www.gmit.ie/">
         <img class="center" src="gmitLogo.png" alt="https://www.gmit.ie/" title="https://www.gmit.ie/" >
     </a>
     <!--Heading to page.-->
-    <h1 style="text-align: center;"> Pie Chart </h1>
+    <h1 class="myClass"> Pie Chart </h1>
     <!--Paragraph explaining what is happening in each situation-->
     <p>
         It uses data imported from a hard coded array in the code. It shows a pie chart with the sections split in proportion to their value divided by the sum of the total values. 
@@ -46,41 +91,55 @@
 
     <br>
     <br>
-    <div id="arrayChart" style="text-align: center;">
-    Select Chart Size:
-    <select id="arrayChartHeight">
-        <option value = "300">300 Pixels</option>
-        <option value = "600">600 Pixels</option>
-        <option value = "900">900 Pixels</option>
-    </select>
-    Select Chart type: 
-    <select id="arrayChartType">
-        <option value = "300">Circles</option>
-        <option value = "600">Stars</option>
-    </select>
-    Select Colour:
-    <input id="colorArray" type="color" value="#FF5733">
-    <br>
-    Enter Value 1:<input type="text" id="valueOne" size="1" Value="70">
-    Enter Value 2:<input type="text" id="valueTwo" size="1" Value="20">
-    Enter Value 3:<input type="text" id="valueThree" size="1" Value="30">
-    Enter Value 4:<input type="text" id="valueFour" size="1" Value="50">
-    <br>
-    <button onclick="drawCharArray()">Draw Array Chart</button>
+
+    <div id="arrayChart" class="selection">
+
+        Select Chart Size:
+        <select id="pieChartWidth">
+            <option value = "300">300 Pixels</option>
+            <option value = "450">450 Pixels</option>
+            <option value = "600">600 Pixels</option>
+        </select>
+        <br>
+        <br>
+        Enter Values:<br>
+        Value 1:<input type="text" id="valueOne" size="1" Value="70">
+        Value 2:<input type="text" id="valueTwo" size="1" Value="20">
+        Value 3:<input type="text" id="valueThree" size="1" Value="30">
+        Value 4:<input type="text" id="valueFour" size="1" Value="50">
+        <br>
+        <br>
+        <button onclick="drawPieChart()">Draw Pie Chart</button>
+        Pie Chart Selection
+        <button onclick="update(data1)">Data 1</button>
+        <button onclick="update(data2)">Data 2</button>
+
     </div>
     <br>
+    <!--This div is for the graph?-->
     <div id="myDiv2" style="text-align: center;"></div>
+    
 
     <br>
     <!--Pie Chart Div-->
     <div id="pieChart" style="text-align: center;">
-        Pie Chart Selection
-        <button onclick="update(data1)">Data 1</button>
-        <button onclick="update(data2)">Data 2</button>
+
+        
     </div>
+    <br>
+
+    <div class="content">
+        Navigation:
+        <ul>
+            <li><a href="project.html">Main page</a></li>
+            <li><a href="barchart.html">Bar chart</a></li>
+            <li><a href="galway.html">Galway</a></li>
+            <li><a href="startHere.html">Landing Page</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
     
-    
-    <a href="project.html">Return to project page</a>
+        <a href="#">Back to top</a>
+    </div>
 </body>
 </html>
 
@@ -88,10 +147,14 @@
 // Scripts for piechart functionality here
 
 
+
+
+
+
+
+
+
 function drawCharArray(){
-    
-// Delete existing div
-    d3.select("#myDiv2").selectAll("*").remove();
 
 // Create Variables
 
@@ -125,13 +188,21 @@ circles.enter()
 
 
 
+
+
+
+
+
+function drawPieChart(){
 // Code block taken from https://www.d3-graph-gallery.com/graph/pie_changeData.html
 // Edited to preform functionality required
 
+// Delete existing div
+d3.select("#pieChart").selectAll("*").remove();
 
 // set the dimensions and margins of the graph
-var widthPie = 450
-var heightPie = 450
+var widthPie = document.getElementById("pieChartWidth").value;
+var heightPie = document.getElementById("pieChartWidth").value;
 var marginPie = 40
 
 // Get values from input
@@ -162,8 +233,9 @@ var color = d3.scaleOrdinal()
     .domain(["a", "b", "c", "d", "e", "f"])
     .range(d3.schemeDark2);
 
+
 // A function that create / update the plot for a given variable:
-function update(data) {
+function update(data){
 
     // Compute the position of each group on the pie:
     var pie = d3.pie()
@@ -197,7 +269,7 @@ function update(data) {
         .remove()
 
 }
-
+}
 // Initialize the plot with the first dataset
 
 update(data1)

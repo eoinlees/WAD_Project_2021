@@ -2,32 +2,81 @@
 <html lang="en">
 <head>
     <title>Galway Page</title>
+
+    <style type="text/css">
+
+        /* content class style - for body*/
+        .content {
+            height: 75%;
+            width: 75%;
+            max-width: 800px;
+            margin: auto;
+            color:black;
+            background-color: #F0F8FF;
+            text-align: justify;
+            text-align: center;
+            
+            }
+    
+        /*My class style - for headings*/
+        .myClass{
+            color: rgb(4, 4, 138);
+            font-size: 30px;
+            text-indent: 10%;
+            
+        }
+
+        .selection{
+        border-style:ridge;
+        border-radius: 15px;
+        margin: 10px;
+        padding: 30px;
+
+        }
+        /* Set Styling links - common on all pages */
+        *{
+            font-family: Arial;
+            
+        }
+        a:link {
+            color: deepskyblue;
+            text-decoration: none;
+        }
+        a:hover{
+            color: darkcyan;
+            text-decoration: underline;
+        }
+        a:visited{
+            color:orangered;
+            
+        }
+    </style>
 </head>
 
-<body bgcolor="#F0F8FF">
+<body  >
 
 <div>
-    <h2>Galway</h2>
+    <h2 class="myClass" >Galway</h2>
     <img src="images\about-galway.jpg" width="800" title="Blackrock diving board">
     <!--Image Source: https://www.galwaytourism.ie/about-galway/-->
 
-    <h3>About Galway</h3>
+    <h3 class="myClass" >About Galway</h3>
     <!--Info about Galway-->
     <p id="changingP">
-        The West of Ireland and in particular County Galway is one of the most unique parts of Ireland for visitors to explore.<br> 
-        With barren fields, rugged coastline, stone-walled fields, stark mountain ranges, and vast boglands, the West has<br>  
-        some of the richest scenic beauty and natural attractions in Ireland.<br> 
-        With Galway City, a true Renaissance city as its hub, the West offers a diverse set of experiences for every visitor.<br>  
-        From the sunsets over Galway Bay to the rocky shores of the Aran Islands, and the enchanting locales of "Quiet Man" country.<br>  
-        Follow the trails of Connemara National Park, tour the great museums, watch craftspeople make hand-knit sweaters and other traditional crafts,<br> 
-        sip a cup of tea beside a turf fire, or listen to the Irish language being spoken and sung. Galway provides glimpses of Ireland as it used to be,<br>  
+        The West of Ireland and in particular County Galway is one of the most unique parts of Ireland for visitors to explore.
+        With barren fields, rugged coastline, stone-walled fields, stark mountain ranges, and vast boglands, the West has 
+        some of the richest scenic beauty and natural attractions in Ireland.
+        With Galway City, a true Renaissance city as its hub, the West offers a diverse set of experiences for every visitor.
+        From the sunsets over Galway Bay to the rocky shores of the Aran Islands, and the enchanting locales of "Quiet Man" country. 
+        Follow the trails of Connemara National Park, tour the great museums, watch craftspeople make hand-knit sweaters and other traditional crafts,
+        sip a cup of tea beside a turf fire, or listen to the Irish language being spoken and sung. Galway provides glimpses of Ireland as it used to be,  
         while also having a thriving urban centre at its heart.
     </p>
 
     <a href="https://www.galwaytourism.ie/about-galway/">Info about Galway</a>
 </div>
 
-</div>
+<div class="selection">
     <h3>Use these selections to change the paragraph styles with the DOM</h1>
 
         <button onclick="changeColorRed()">Change Font Colour to Blue</button>
@@ -51,7 +100,7 @@
         bgcolor="#efefef"
 
         >
-        <h3>Galway Weekly Weather:</h3>
+        <h3 class="myClass">Galway Weekly Weather:</h3>
         <tr>
             <th bgcolor="#cccccc">Day</th>
             <td>Monday</td>
@@ -77,6 +126,7 @@
 
     <p>All data sourced from <a href="https://www.met.ie/weather-forecast/galway-city-galway">Met eireann</a></p>
 </div>
+<div>
     Navigation:
     <ul>
         <li><a href="project.html">Main page</a></li>
@@ -87,7 +137,7 @@
     </ul>
 
     <a href="#">Back to top</a>
-
+</div>
 </body>
 
 <script>
