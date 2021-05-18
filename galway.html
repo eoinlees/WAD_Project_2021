@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Galway Page</title>
+</head>
+
+<body bgcolor="#F0F8FF">
+
+<div>
+    <h2>Galway</h2>
+    <img src="images\about-galway.jpg" width="800" title="Blackrock diving board">
+    <!--Image Source: https://www.galwaytourism.ie/about-galway/-->
+
+    <h3>About Galway</h3>
+    <!--Info about Galway-->
+    <p id="changingP">
+        The West of Ireland and in particular County Galway is one of the most unique parts of Ireland for visitors to explore.<br> 
+        With barren fields, rugged coastline, stone-walled fields, stark mountain ranges, and vast boglands, the West has<br>  
+        some of the richest scenic beauty and natural attractions in Ireland.<br> 
+        With Galway City, a true Renaissance city as its hub, the West offers a diverse set of experiences for every visitor.<br>  
+        From the sunsets over Galway Bay to the rocky shores of the Aran Islands, and the enchanting locales of "Quiet Man" country.<br>  
+        Follow the trails of Connemara National Park, tour the great museums, watch craftspeople make hand-knit sweaters and other traditional crafts,<br> 
+        sip a cup of tea beside a turf fire, or listen to the Irish language being spoken and sung. Galway provides glimpses of Ireland as it used to be,<br>  
+        while also having a thriving urban centre at its heart.
+    </p>
+
+    <a href="https://www.galwaytourism.ie/about-galway/">Info about Galway</a>
+</div>
+
+</div>
+    <h3>Use these selections to change the paragraph styles with the DOM</h1>
+
+        <button onclick="changeColorRed()">Change Font Colour to Blue</button>
+        <button onclick="changeSize60()">Change Font Size to 60px</button>
+        <button onclick="changeStyleItalic()">Change Font Style to italic</button>
+        <br>
+        <button onclick="changeColorBlack()">Change Font Colour to Black</button>
+        <button onclick="changeSize15()">Change Font Size to 15px</button>
+        <button onclick="changeStyleNormal()">Change Font Style to Normal</button>
+
+    <br>
+    <br>
+</div>
+
+<div>
+<!--Table Starts here-->
+    <table width="400"
+        cellpadding="10"
+        cellspacing="10"
+        border="2"
+        bgcolor="#efefef"
+
+        >
+        <h3>Galway Weekly Weather:</h3>
+        <tr>
+            <th bgcolor="#cccccc">Day</th>
+            <td>Monday</td>
+            <td>Tuesday</td>
+            <td>Wednesday</td>
+            <td>Thursday</td>
+            <td>Friday</td>
+            <td>Saturday</td>
+            <td>Sunday</td>
+        </tr>
+        <tr>
+            <th bgcolor="#cccccc">Weather</th>
+            <td>Rain</td>
+            <td>Rain</td>
+            <td>Rain</td>
+            <td>Probably Rain</td>
+            <td>More Rain</td>
+            <td>Its a bit far out yet, but rain</td>
+            <td>Rain</td>
+        </tr>
+    </table>
+    <!--Table Ends here-->
+
+    <p>All data sourced from <a href="https://www.met.ie/weather-forecast/galway-city-galway">Met eireann</a></p>
+</div>
+    Navigation:
+    <ul>
+        <li><a href="project.html">Main page</a></li>
+        <li><a href="barchart.html">Bar chart</a></li>
+        <li><a href="piechart.html">Pie Chart</a></li>
+        <li><a href="startHere.html">Landing Page</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+
+    <a href="#">Back to top</a>
+
+</body>
+
+<script>
+// Functions to manipulate the DOM
+    function changeColorRed(){
+        document.getElementById("changingP").style.color = "Blue";
+    }
+
+    function changeSize60(){
+        document.getElementById("changingP").style.fontSize = "60px";
+    }
+
+    function changeStyleItalic(){
+        document.getElementById("changingP").style.fontStyle = "italic";
+    }
+    function changeColorBlack(){
+        document.getElementById("changingP").style.color = "black";
+    }
+    function changeSize15(){
+        document.getElementById("changingP").style.fontSize = "15px";
+    }
+
+    function changeStyleNormal(){
+        document.getElementById("changingP").style.fontStyle = "normal";
+    }
+		
+
+</script>
+
+
+</html>

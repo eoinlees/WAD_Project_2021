@@ -1,36 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Title-->
     <title>Login Page</title>
-<!--Comments go here-->
+
 </head>
-    <body>
+<!--Main body of page-->
+
+    <body bgcolor="#F0F8FF">
+    <!--GMIT Logo and link to home page-->
     <a href="startHere.html">
-        <img src="gmitLogo.png" alt="Home link" title="Home page" width="18%">
+        <img src="gmitLogo.png" alt="Home link" title="Home page" width="300">
     </a>
 
-    <h2>Please enter the email and password provided to access the main website. </h2>
-        <!--Comments go here-->
+<div id="login">
+    <h1>Login Page</h2> 
+    <!--Login instructions and required input-->
+    <h2>Please enter email and passwod below.</h2>
+    <p>
+        The following email and password are required to access the project page: <br>
+        <br>
+        <b>email:</b> hello@email.com <br>
+        <b>password:</b> password
+    </p>
+    <!--Login form input starts here-->
         <form>
+            <b>E-mail</b><br>
             <input type="email" size="30" required>
-            <input type="submit">
+            <br>
+            <br>
+            <b>Password</b><br>
+            <input  type="password" size="30" id="password" required>
+            <br>
+            <br>
+            
+            <input id="myButton" type="submit" value="Sign In" onclick="checkPassword()" >
+            <br>
+            
         </form>
+        <!--Login form ends-->
+        <br>
+</div>
 
-        <form>
-            <input type="date" >
-            <input type="submit">
-        </form>
-
-        <form>
-            <input type="password" size="30" required>
-            <input type="submit" >
-        </form>
-
-    <p>The input boxes above are coded using html input forms. The first box requires you to enter a valid email address. The next functions as a password input and blocks out what you typle. </p>
+<!--description of login functionality-->
+<div id="description">
+    <p class="paragraphs" id="paragraphOne">
+        The input boxes above are coded using html input forms.<br> 
+        The first box requires you to enter a valid email address. Specifically the one provided above. 
+        <br>The next functions as a password input and blocks out what you type.<br> 
+        On click of the <b>Sign In</b> button you will be taken to the project page.
+    </p>
 
     <a href="startHere.html">Return to landing page</a>
     <br>
     <a href="project.html">Short cut to project page</a>
     </body>
+</div>
+
+<script>
+
+//alert("Welcome to my projecet page!");
+
+function checkPassword(){
+    if(document.getElementById('password').value == 'password'){
+        alert('Correct Password!'); 
+        document.location.href="project.html";
+        }
+    else {
+        alert('Wrong Password!');
+        return false;
+    };
+}
+
+</script>
 
 </html>
